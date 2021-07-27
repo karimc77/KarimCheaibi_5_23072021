@@ -1,0 +1,55 @@
+h2 {
+    color:#fff;
+}
+
+fieldset {
+    margin-bottom: 15px;
+    padding: 10px;
+    width: 500px;
+}
+   
+legend {
+    padding: 0px 3px;
+    font-weight: bold;
+    color:#fff;
+}
+   
+label {
+    width: 110px;
+    display: inline-block;
+    vertical-align: top;
+    margin: 6px;
+}
+
+legend, label {
+    color:#fff;
+}
+   
+input {
+    width: 500px;
+ }
+
+/*input:focus {
+    background: #faa80e;
+}*/
+
+.divbtn {
+    /*display:flex;
+    justify-content: center;*/
+    margin: 40px;
+}
+
+.validate {
+    /*padding: 5px;
+    color:black;*/
+    border-radius: 25px 25px 25px 25px;
+    padding: 15px 20px;
+    background-color: #faa80e;
+    color: black;
+    outline: none;
+}
+
+.validate:hover {
+    background: #faa80e;
+    box-shadow: 8px 5px 5px black;
+}

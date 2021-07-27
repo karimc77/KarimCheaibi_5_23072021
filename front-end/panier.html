@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="nos Teddys Orinoco sont tous faits à la main">
+        <link rel="stylesheet" type="text/css" href="css/headerfooter.css">
+        <link rel="stylesheet" type="text/css" href="css/panier.css">
+        
+        <title>Orinoco</title>
+    </head>
+
+<body>
+    <header>        
+        <img class="logo" src="img/logo/Orinoco.png" alt="logo Orinoco"/>
+        <h1>Orinoco nos Ours en peluches</h1>
+        <nav>
+            <a href="index.html">Accueil</a>            
+        </nav>
+    </header>
+
+    <h2>Formulaire de Commande</h2>
+    <form>  
+        <fieldset>
+            <legend>Contact</legend>
+                <label for="nom">Nom: </label>
+                <input type="text" id="nom" placeholder="Saisissez votre nom" autofocus="" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}"><br>
+
+                <label for="nom">Prénom: </label>
+                <input type="text" id="nom" placeholder="Saisissez votre prenom" autofocus="" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}"><br>
+      
+                <label for="adresse">Adresse: </label>
+                <input type="text" id="adresse" type="adresse" placeholder="Saisissez votre adresse" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{4,}"><br>
+
+                <label for="ville">Ville: </label>
+                <input type="text" id="ville" type="adresse" placeholder="Saisissez votre ville" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,}"><br>
+      
+                <label for="email">Email: </label>
+                <input type="email" id="email" type="email" placeholder="@mail" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"><br>
+        </fieldset>   
+        
+        <div class="divbtn">
+            <button classe="validate">Commander</button>
+        </div>
+    </form>
+
+    <footer>
+        <p class="liens"><a class="liens" href="index.html">Mentions légales</a></p>
+        <p class="liens"><a class="mail" href="mailto:ours@orinoco.com">Contact</a></p>
+    </footer>
+
+</body>
+</html>
