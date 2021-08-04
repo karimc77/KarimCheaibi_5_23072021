@@ -15,5 +15,3 @@ fetch("http://localhost:3000/api/teddies")
     console.log(cards);
     card.innerHTML = cards;
   });
-
-//   cards.style.background ="pink";
