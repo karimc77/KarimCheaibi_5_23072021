@@ -10,7 +10,7 @@ fetch("http://localhost:3000/api/teddies")
                       <h2>${product.name}</h2> 
                       <h3>${product.price}</h3>
                     </article>
-                </div>;`;
+                </div>`;
     }
     console.log(cards);
     card.innerHTML = cards;
