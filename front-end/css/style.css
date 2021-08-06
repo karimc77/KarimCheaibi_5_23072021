@@ -31,16 +31,16 @@ img {
     display:flex;
     flex-wrap: wrap;
     padding: 0px 20px;
-    background-color: #fff;
+    background-color: #faa80e;
     border-radius: 25px;
     margin-top: 10%;
     text-decoration: none;
     width: 60%;
 }
 
-.peluche:hover {
+/* .peluche:hover {
     background-color: #faa80e;
-}
+} */
 
 img {
     width: 70%;
@@ -52,4 +52,24 @@ img {
     /* flex-direction: row; */
     /* justify-content: space-between; */
     align-items: center;
+}
+
+/* .product {
+    background-color: rgb(161, 145, 145);
+    text-decoration: none;
+    color:black;
+    margin: 20px;
+    border: 5px solid #333;
+    border-radius: 20px 20px 20px 20px;
+} */
+
+.product {
+    width: 184px;
+    background-color: #333;
+    color:#fff;
+    padding: 10px;
+    border-radius: 10px;
+    margin: auto;
+    cursor: pointer;
+    text-decoration: none;
 }

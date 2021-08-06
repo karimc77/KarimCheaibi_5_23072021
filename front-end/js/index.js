@@ -1,4 +1,13 @@
-fetch("http://localhost:3000/api/teddies")
+const urlSite = location.hostname;
+console.log(urlSite);
+let urlApi = "http://localhost:3000/api/teddies";
+
+if(urlSite.includes('github')) {
+  urlApi = "./data/teddy.json";
+}
+
+
+fetch(urlApi)
   .then((response) => response.json())
   .then((data) => {
     const card = document.querySelector(".peluche");
@@ -9,6 +18,7 @@ fetch("http://localhost:3000/api/teddies")
                     <article class="alignprice">
                       <h2>${product.name}</h2> 
                       <h3>${product.price}</h3>
+                      <a class="product" href="product.html?id=${product._id}" target="_blank">Acheter ce produit</a>
                     </article>
                 </div>`;
     }
