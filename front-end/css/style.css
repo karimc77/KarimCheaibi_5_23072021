@@ -54,6 +54,8 @@ img {
     align-items: center;
 }
 
+/* Style sur le lien Acheter notre produit */
+
 /* .product {
     background-color: rgb(161, 145, 145);
     text-decoration: none;
@@ -72,4 +74,26 @@ img {
     margin: auto;
     cursor: pointer;
     text-decoration: none;
+}
+
+/* Style sur la page product.html */
+
+#article {
+    background-color: #faa80e;
+}
+
+.row {
+    color:#333;
+    width:90%;
+    border-radius:5px;
+
+}
+
+.ajoutPanier {
+    border:0;
+    background-color:#f3e9f1;
+    padding:12px;
+    border-radius:15px;
+    box-shadow: 0px 0px 8px 0px #fff;
+    margin-left:5px;
 }
