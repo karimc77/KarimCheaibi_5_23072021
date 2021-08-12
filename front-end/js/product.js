@@ -3,7 +3,7 @@ console.log(urlSite);
 let urlApi = "http://localhost:3000/api/teddies";
 
 if(urlSite.includes('github')) {
-  urlApi = "../data/teddy.json";
+  urlApi = "front-end/data/teddy.json";
 }
 
 fetch(urlApi)
@@ -11,8 +11,8 @@ fetch(urlApi)
   .then((data) => {
     const card = document.querySelector("#article");
     let cards = "";
-    
-        cards+= `<div id="article">
+
+        cards+= `<div>
                     <h1 class="row">${card.name}</h1>
                     <p class="row"><img src="${card.imageUrl}" alt="image d'ours en détails"/></p>
                     <p class="row">${card.description}</p>

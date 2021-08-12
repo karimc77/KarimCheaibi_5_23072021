@@ -3,7 +3,7 @@ console.log(urlSite);
 let urlApi = "http://localhost:3000/api/teddies";
 
 if(urlSite.includes('github')) {
-  urlApi = "../data/teddy.json";
+  urlApi = "front-end/data/teddy.json";
 }
 
 
@@ -17,7 +17,7 @@ fetch(urlApi)
                     <img src="${product.imageUrl}" alt=""/> 
                     <article class="alignprice">
                       <h2>${product.name}</h2> 
-                      <h3>${product.price}</h3>
+                      <h3>${(product.price/100).toFixed(2).replace(".",",")}€</h3>
                       <a class="product" href="product.html?id=${product._id}" target="_blank">Acheter ce produit</a>
                     </article>
                 </div>`;
