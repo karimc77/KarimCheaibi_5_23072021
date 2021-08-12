@@ -3,7 +3,7 @@ console.log(urlSite);
 let urlApi = "http://localhost:3000/api/teddies";
 
 if(urlSite.includes('github')) {
-  urlApi = "front-end/data/teddy.json";
+  urlApi = "../data/teddy.json";
 }
 
 fetch(urlApi)
