@@ -2,7 +2,7 @@ const teddies = [
   {
     "colors": ["Tan", "Chocolate", "Black", "White"],
     "_id": "5be9c8541c9d440000665243",
-    "name": "Toto",
+    "name": "Norbert",
     "price": 2900,
     "imageUrl": "teddy_1.jpg",
     "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
