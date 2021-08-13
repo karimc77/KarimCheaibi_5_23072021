@@ -1,8 +1,15 @@
 const urlSite = location.hostname;
 console.log(urlSite);
 
+// Recuperation des paramètres Location pour récuperer l'id produit
 let params = new URL(document.location).searchParams;
 let id = params.get("id");
+
+// Test pour voir si l'id est manquant
+if(!!id === false) {
+  console.error("l' id est manquant");
+}
+
 
 let urlApi = `http://localhost:3000/api/teddies/${id}`;
 
@@ -42,3 +49,9 @@ if( urlSite.includes('github')) {
     console.log(cards);
     card.innerHTML = cards;
   });
+
+//creer une fonction sur le bouton ajouter panier qui prend en parametre l'id
+
+//stocker ce produit dans le panier avec local storage
+
+//dans panier.js on utiliser localstorage.getItem
