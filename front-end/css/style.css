@@ -97,3 +97,58 @@ img {
     box-shadow: 0px 0px 8px 0px #fff;
     margin-left:5px;
 }
+
+
+/* Affichage des produits et caracteristiques */ 
+
+/* .product-card__infos__buttons {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+} */
+  
+/* .product-card__infos__quantity {
+    margin-bottom: 20px;
+} */
+  
+/* .product-card__infos__color {
+    margin-bottom: 40px;
+} */
+  
+/* .product-card__infos .added-to-cart-confirmation {
+    visibility: hidden;
+} */
+  
+/* .product-card__infos .added-to-cart-confirmation p {
+    padding: 5px;
+    background-color: #64c264;
+    border: #368a36 1px solid;
+} */
+  
+/* .product-card__infos .product-card__infos__button {
+    padding: 20px;
+    background: #e1bb80;
+    border-radius: 5px;
+    border: solid 1px #352208;
+} */
+  
+/* .product-card__infos .back-to-home {
+    background: #d8d8d8;
+} */
+  
+/* .product-card__img {
+    height: 50%;
+    width: 100%;
+    background: #444;
+} */
+  
+/* .product-card__img img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px 20px 0 0;
+} */
+  
+#nounoursNum {
+    width: 50px;
+}

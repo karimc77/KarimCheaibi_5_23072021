@@ -36,20 +36,51 @@ if( urlSite.includes('github')) {
                     <p class="row"><img src="${data.imageUrl}" alt="image d'ours en détails"/></p>
                     <p class="row">${data.description}</p>
                     <p class="row">Prix: ${(data.price/100).toFixed(2).replace(".",",")}€</p>
+
+                    <div class="quantity">
+                      <label for="nounoursNum">Quantité :</label>
+                      <input id="nounoursNum" type="number" name="nounoursNum" value="1" min="1">
+                    </div>
+
         <!-- Personalisation de la couleur -->
-                    <label for="select__color">
-                    <h3>Personnaliser votre ours</h3>
-                    </label>
-                    <select id="${data.colors}">
-        <!-- Mes choix de couleurs --!>
-                    </select>
+                    <div class="product-card__infos__color">
+                      <label for="colorSelect">Couleur :</label>
+                      <select name="color" id="colorSelect"></select>
+                    </div>
+
+
+
+        
                     <button class="ajoutPanier">Ajouter au panier</button>
                 </div>`;
-                
+
+
+        //             <label for="select__color">
+        //             <h3>Personnaliser votre ours</h3>
+        //             </label>
+        //             <select id="${data.colors}">
+        // <!-- Mes choix de couleurs --!>
+        //             </select>
+
+
+
+
+    
+        
+
+
     console.log(cards);
     card.innerHTML = cards;
   });
 
+
+
+  let colorSelect = document.getElementById("colorSelect");
+    for (let i = 0; i < article.colors.length; i++) {
+           let option = document.createElement("option");
+           option.innerText = article.colors[i];
+           colorSelect.appendChild(option);
+  }
 //creer une fonction sur le bouton ajouter panier qui prend en parametre l'id
 
 //stocker ce produit dans le panier avec local storage
