@@ -75,12 +75,7 @@ if( urlSite.includes('github')) {
 
 
 
-  let colorSelect = document.getElementById("colorSelect");
-    for (let i = 0; i < article.colors.length; i++) {
-           let option = document.createElement("option");
-           option.innerText = article.colors[i];
-           colorSelect.appendChild(option);
-  }
+  
 //creer une fonction sur le bouton ajouter panier qui prend en parametre l'id
 
 //stocker ce produit dans le panier avec local storage
