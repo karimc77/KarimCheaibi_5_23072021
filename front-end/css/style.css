@@ -27,7 +27,7 @@ img {
 
 /* Style des produits sur la page index.html dynamiquement */
 
-.peluche {
+.products {
     display:flex;
     flex-wrap: wrap;
     padding: 0px 20px;
@@ -65,7 +65,7 @@ img {
     border-radius: 20px 20px 20px 20px;
 } */
 
-.product {
+.btn {
     width: 184px;
     background-color: #333;
     color:#fff;
@@ -89,65 +89,78 @@ img {
 
 }
 
-.ajoutPanier {
+/* .ajoutPanier {
     border:0;
     background-color:#f3e9f1;
     padding:12px;
     border-radius:15px;
     box-shadow: 0px 0px 8px 0px #fff;
     margin-left:5px;
-}
+} */
 
 
 /* Affichage des produits et caracteristiques */ 
 
-/* .product-card__infos__buttons {
+.productInfosName {
+    font-size: 1.7rem;
+    font-weight: 800;
+}
+
+
+.productInfosDesc,
+.productInfosPrice,
+.productInfosQuantity {
+    color: black;
+    font-style: italic;
+}
+
+.productInfosBtn {
     display: flex;
     justify-content: space-around;
     text-align: center;
-} */
+}
   
-/* .product-card__infos__quantity {
+.productInfosQuantity {
     margin-bottom: 20px;
-} */
+}
   
-/* .product-card__infos__color {
+.productInfosColor {
     margin-bottom: 40px;
-} */
+}
   
-/* .product-card__infos .added-to-cart-confirmation {
+.productInfos .ajoutPanierconfirm {
     visibility: hidden;
-} */
+}
   
-/* .product-card__infos .added-to-cart-confirmation p {
+.productInfos .ajoutPanierconfirm p {
     padding: 5px;
     background-color: #64c264;
     border: #368a36 1px solid;
-} */
+}
   
-/* .product-card__infos .product-card__infos__button {
+.productInfos /*productInfosBtnReturn*/ {
     padding: 20px;
     background: #e1bb80;
     border-radius: 5px;
     border: solid 1px #352208;
-} */
+}
   
-/* .product-card__infos .back-to-home {
+.productInfos /*.return*/ {
     background: #d8d8d8;
-} */
+}
   
-/* .product-card__img {
+.productImg {
     height: 50%;
     width: 100%;
     background: #444;
-} */
+}
   
-/* .product-card__img img {
+.productImg img {
     object-fit: cover;
     width: 100%;
     height: 100%;
     border-radius: 20px 20px 0 0;
-} */
+}
   
 #nounoursNum {
     width: 50px;

@@ -10,71 +10,78 @@ if(!!id === false) {
   console.error("l' id est manquant");
 }
 
-
 let urlApi = `http://localhost:3000/api/teddies/${id}`;
 
 if(urlSite.includes('github')) {
-  urlApi = "data/teddy.json";
+   urlApi = "data/teddy.json";
+}
+
+// Déclaration des variables pour recuperer les données et les afficher sur la page 
+
+const productImg = document.querySelector(".img");
+const productName = document.querySelector(".productInfosName");
+const productDesc = document.querySelector(".productInfosDesc");
+const productPrice = document.querySelector(".productInfosPrice");
+const nounoursNum = document.querySelector("#nounourNum");
+const colorSelect = document.querySelector("#colorSelect");
+
+main();
+
+function main() {
+  getArticles();
+  addToCart();
+}
+
+function getArticles() {
+
+// On récupère le produit selectionné avec l' id dans la requete
+
+  fetch(urlApi)
+    .then(function (response) {
+      return response.json();
+    })    
+    .then(function (Apiresult) {
+
+// On place les données reçues via l'API aux bons endroits sur la page
+
+      product = Apiresult;
+      productName.innerHTML = product.name;
+      productImg.src = product.imageUrl;
+      productDesc.innerText = product.description;
+
+// Formatage du prix pour l'afficher en euros
+
+      product.price = product.price / 100;
+      productPrice.innerText = new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+      }).format(product.price);
+
+// Récuperation des couleurs de chaque peluche
+
+      let colorSelect = document.getElementById("colorSelect");
+      for (let i = 0; i < product.colors.length; i++) {
+        let option = document.createElement("option");
+        option.innerText = product.colors[i];
+        colorSelect.appendChild(option);
+      }
+    });
 }
 
 
-fetch(urlApi)
-  .then((response) => response.json())
-  .then((data) => {
-    
-if( urlSite.includes('github')) {
-  data = data.filter( teddy => teddy.id === id)[0];
-}
-
-    console.log(data);
-
-    const card = document.querySelector("#article");
-    let cards = "";
-
-        cards+= `<div>
-                    <h1 class="row">${data.name}</h1>
-                    <p class="row"><img src="${data.imageUrl}" alt="image d'ours en détails"/></p>
-                    <p class="row">${data.description}</p>
-                    <p class="row">Prix: ${(data.price/100).toFixed(2).replace(".",",")}€</p>
-
-                    <div class="quantity">
-                      <label for="nounoursNum">Quantité :</label>
-                      <input id="nounoursNum" type="number" name="nounoursNum" value="1" min="1">
-                    </div>
-
-        <!-- Personalisation de la couleur -->
-                    <div class="product-card__infos__color">
-                      <label for="colorSelect">Couleur :</label>
-                      <select name="color" id="colorSelect"></select>
-                    </div>
-
-
-
-        
-                    <button class="ajoutPanier">Ajouter au panier</button>
-                </div>`;
-
-
-        //             <label for="select__color">
-        //             <h3>Personnaliser votre ours</h3>
-        //             </label>
-        //             <select id="${data.colors}">
-        // <!-- Mes choix de couleurs --!>
-        //             </select>
-
-
-
-
-    
-        
-
-
-    console.log(cards);
-    card.innerHTML = cards;
-  });
-
-
-
+// // ----------------- Gestion du localStorage
+// let arrayProductsInCart = [];
+      
+// // Si le localStorage existe, on récupère son contenu, on l'insère dans le tableau arrayProductsInCart, puis on le renvoit vers le localStorage avec le nouveau produit ajouté.
+// if (localStorage.getItem("products") !== null) {
+//   arrayProductsInCart = JSON.parse(localStorage.getItem("products"));
+  
+  
+//   // Si le LS est vide, on le crée avec le produit ajouté
+// } 
+//   arrayProductsInCart.push(pelucheAjout);
+//   localStorage.setItem("products", JSON.stringify(arrayProductsInCart));
+  
   
 //creer une fonction sur le bouton ajouter panier qui prend en parametre l'id
 

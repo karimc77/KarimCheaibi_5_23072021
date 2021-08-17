@@ -14,15 +14,15 @@ if(urlSite.includes('github')) {
 fetch(urlApi)
   .then((response) => response.json())
   .then((data) => {
-    const card = document.querySelector(".peluche");
+    const card = document.querySelector(".products");
     let cards = "";
     for (const product of data) {
-      cards += `<div class="peluche" id="${product._id}">
+      cards += `<div class="products" id="${product._id}">
                     <img src="${product.imageUrl}" alt=""/>
                     <article class="alignprice">
                       <h2>${product.name}</h2> 
                       <h3>${(product.price/100).toFixed(2).replace(".",",")}€</h3>
-                      <a class="product" href="product.html?id=${product._id}">Acheter ce produit</a>
+                      <a class="btn" href="product.html?id=${product._id}">Acheter ce produit</a>
                     </article>
                 </div>`;
     }
