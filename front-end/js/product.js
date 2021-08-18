@@ -29,7 +29,7 @@ main();
 
 function main() {
   getArticles();
-  addToCart();
+  //addToCart();
 }
 
 function getArticles() {
@@ -44,7 +44,13 @@ function getArticles() {
 
 // On place les données reçues via l'API aux bons endroits sur la page
 
-      product = Apiresult;
+if( Array.isArray(Apiresult)) {
+  product = Apiresult.find( result => result._id === id);
+} else {
+  product = Apiresult;
+}
+console.log(product);
+
       productName.innerHTML = product.name;
       productImg.src = product.imageUrl;
       productDesc.innerText = product.description;
