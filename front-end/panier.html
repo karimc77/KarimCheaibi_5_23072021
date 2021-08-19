@@ -18,36 +18,69 @@
             <a href="index.html">Accueil</a>            
         </nav>
     </header>
+    
+    <main>
+        <div class="container">
 
-    <h2>Formulaire de Commande</h2>
-    <form>  
-        <fieldset>
-            <legend>Contact</legend>
-                <label for="nom">Nom: </label>
-                <input type="text" id="nom" placeholder="Saisissez votre nom" autofocus="" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}"><br>
+<!-- --------------------- PANIER --------------------------------------------------->
 
-                <label for="nom">Prénom: </label>
-                <input type="text" id="nom" placeholder="Saisissez votre prenom" autofocus="" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}"><br>
+            <div class="cardpanier">
+                <h2 class="panier">Votre panier</h2>
+                    <div class="recuppanier">
+                        <div class="recuppanierrow">
+                            <div class="recuppaniername row">Nom: </div>
+                                <div class="recuppaniername quantity row">Quantité: </div>
+                                    <div class="recuppaniername price row">Prix: </div>
+                        </div>
+                    </div>
+
+                    <div class="paniervide">
+                        <a href="cart.html">
+                            <div class="cart-card__form__button verspaniervide">Vider le panier</div>
+                        </a>
+                    </div>
+                    <h2 class="total"></h2>            
+            </div>
+
+<!-- --------------------- FORMULAIRE --------------------------------------------------->
+            <div>
+                <h2>Formulaire de Commande</h2>
+                <form>  
+                    <fieldset>
+                    <legend>Contact</legend>
+                            <label for="nom">Nom: </label>
+                            <input type="text" id="nom" placeholder="Saisissez votre nom" autofocus="" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}"><br>
+
+                            <label for="nom">Prénom: </label>
+                            <input type="text" id="nom" placeholder="Saisissez votre prenom" autofocus="" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{3,}"><br>
       
-                <label for="adresse">Adresse: </label>
-                <input type="text" id="adresse" type="adresse" placeholder="Saisissez votre adresse" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{4,}"><br>
+                            <label for="adresse">Adresse: </label>
+                            <input type="text" id="adresse" type="adresse" placeholder="Saisissez votre adresse" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{4,}"><br>
 
-                <label for="ville">Ville: </label>
-                <input type="text" id="ville" type="adresse" placeholder="Saisissez votre ville" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,}"><br>
+                            <label for="ville">Ville: </label>
+                            <input type="text" id="ville" type="adresse" placeholder="Saisissez votre ville" required pattern="[a-zA-Z\sáàâäãåçéèêëíìîïñóòôöõúùûüýÿæœÁÀÂÄÃÅÇÉÈÊËÍÌÎÏÑÓÒÔÖÕÚÙÛÜÝŸÆŒ]{2,}"><br>
       
-                <label for="email">Email: </label>
-                <input type="email" id="email" type="email" placeholder="@mail" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"><br>
-        </fieldset>   
+                            <label for="email">Email: </label>
+                            <input type="email" id="email" type="email" placeholder="@mail" required="" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}"><br>
+                    </fieldset>   
         
-        <div class="divbtn">
-            <button classe="validate">Commander</button>
+                <div class="divbtn">
+                    <button classe="validate">Commander</button>
+                </div>
+                </form>
+            </div>
+            
+            <div class="sipaniervide">
+                <h2>Votre panier est vide. <a href="index.html">Remplissez le d'abord !</a></h2>
+            </div>
+
         </div>
-    </form>
+    </main>
 
     <footer>
-        <p class="liens"><a class="liens" href="index.html">Mentions légales</a></p>
+        <p class="liens"><a class="liens" href="panier.html">Mentions légales</a></p>
         <p class="liens"><a class="mail" href="mailto:ours@orinoco.com">Contact</a></p>
     </footer>
-
+    <script src="./js/panier.js"></script>
 </body>
 </html>
