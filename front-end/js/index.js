@@ -17,7 +17,7 @@ fetch(urlApi)
     const card = document.querySelector(".products");
     let cards = "";
     for (const product of data) {
-      cards += `<div class="products" id="${product._id}">
+      cards += `<div class="productsproduits" id="${product._id}">
                     <img src="${product.imageUrl}" alt=""/>
                     <article class="alignprice">
                       <h2>${product.name}</h2> 

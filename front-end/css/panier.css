@@ -54,6 +54,23 @@
     align-self: center;
   }
 
+  .paniervide {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+  
+  .paniervide .verspaniervide {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  
+  .paniervide .verspaniervide:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+
   .container .recuppaniername {
     display: flex;
     justify-content: center;
@@ -63,78 +80,178 @@
     font-weight: bold;
   }
   
-  .container .cart-card__recap__data {
+  /*.container .cart-card__recap__data {
     display: flex;
     justify-content: center;
     align-self: center;
     width: 120px;
     margin: 2px 0;
     height: 30px;
-  }
+  }*/
   
-  .container .cart-card__recap__data .fa-trash:hover {
+  /*.container .cart-card__recap__data .fa-trash:hover {
     cursor: pointer;
     opacity: 0.7;
     font-size: 17px;
     transition: 0.3s;
-  }
+  }*/
   
 
-
-
 /* FORMULAIRE */
-h2 {
-    color:#fff;
-}
 
-fieldset {
-    margin-bottom: 15px;
-    padding: 10px;
-    width: 500px;
-}
-   
-legend {
-    padding: 0px 3px;
-    font-weight: bold;
-    color:#fff;
-}
-   
-label {
-    width: 110px;
-    display: inline-block;
-    vertical-align: top;
-    margin: 6px;
-}
+  .container .recuppanier .panierbtn {
+    margin: 5px 0;
+    width: 130px;
+    padding: 20px;
+    border-radius: 5px;
+    border: solid 1px #352208;
+  }
 
-legend, label {
-    color:#fff;
-}
-   
-input {
-    width: 500px;
- }
+  .container .panierform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #352208;
+    height: 100%;
+  }
+  
+  .container .panierform .form {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+  }
+  
+  .container .panierform .nomprenom {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .container .panierform .postal-and-city {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  .container .panierform .panierformrow {
+    margin: 5px 0px;
+  }
+  
+  .container .panierform .panierformrow label {
+    display: none;
+  }
+  
+  .container .panierform .panierformrow {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .container .panierform #phoneproduct {
+    width: 100%;
+  }
+  
+  .container .panierform #mailproduct {
+    width: 100%;
+  }
+  
+  .container .panierform #mailproduct input[type="text"] {
+    margin: 10px;
+  }
+  
+  .container .panierform #mailproduct #adress {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .container .commandebtn {
+    display: flex;
+    justify-content: space-around;
+    text-align: center;
+  }
+  
+  /* --------------------------------------------------------------*/
+  /* Style ajouté dans panier.js*/
+  
+  .container .cart-card__form__quantity {
+    margin-bottom: 20px;
+  }
+  
+  .container .cart-card__form__color {
+    margin-bottom: 40px;
+  }
+  /* --------------------------------------------------------- */
 
-/*input:focus {
-    background: #faa80e;
-}*/
-
-.divbtn {
-    /*display:flex;
-    justify-content: center;*/
-    margin: 40px;
-}
-
-.validate {
-    /*padding: 5px;
-    color:black;*/
-    border-radius: 25px 25px 25px 25px;
-    padding: 15px 20px;
-    background-color: #faa80e;
+  .container .panierform .panierbtn {
+    padding: 20px;
+    background: #e1bb80;
+    border-radius: 5px;
+    border: solid 1px #352208;
+  }
+  
+  .container .panierform .erreur {
+    padding: 5px 0;
+    color: red;
+  }
+  
+  .container .panierform .pay {
+    font-family: Josefin Sans;
+    font-size: 18px;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  
+  .container .panierform .pay:hover {
+    cursor: pointer;
+    opacity: 0.8;
+  }
+  
+  .container .sipaniervide {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    height: 90vh;
+  }
+  
+  .container .sipaniervide h2 {
+    margin-top: 75px;
+  }
+  
+  .container .sipaniervide h2 a {
     color: black;
-    outline: none;
-}
+    text-decoration: underline;
+  }
+  
+  .container .total {
+    margin-bottom: 0;
+  }
 
-.validate:hover {
-    background: #faa80e;
-    box-shadow: 8px 5px 5px black;
-}
+/* --------------------------------------------------------------*/
+/* style ajouté dans panier.js */ 
+
+  .title-remove {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  
+  .data-bin {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+  
+  .data-quantity {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+  }
+/* --------------------------------------------------------------*/
+
+/* MEDIA QUERY pour le RESPONSIVE */
