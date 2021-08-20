@@ -1,9 +1,6 @@
-let panier = document.querySelector(".recuppanier"); //cart-card__recap
+let panier = document.querySelector(".recuppanier");
 const product = localStorage.getItem("products");
 const countproduct = JSON.parse(product);
-
-// let cart = document.querySelector(".cart-card__recap"); //"recuppanier"
-// let copyOfLS = JSON.parse(localStorage.getItem("products"));
 
 console.log("count",product,countproduct);
 
@@ -13,18 +10,18 @@ main();
 // Création des fonctions :
 
 function main() {
-  affichepanier(); //displaycart
-  totalpanier(); //countTotalInCart
-  viderpanier(); //toEmptyCart
-  //formulaire(); //checkFormAndPostRequest
+  affichepanier(); 
+  totalpanier(); 
+  viderpanier(); 
+  //formulaire(); 
 }
 
 // Création affichepanier :
 
 function affichepanier() {
-    let testPanierVide = document.querySelector(".paniervide"); //width-to-empty-cart
-    let cardPanier = document.querySelector(".cardpanier");       //cart-card
-    let panierVide = document.querySelector(".sipaniervide"); //if-empty-cart
+    let testPanierVide = document.querySelector(".paniervide"); 
+    let cardPanier = document.querySelector(".cardpanier");       
+    let panierVide = document.querySelector(".sipaniervide"); 
   
 // Si le localStorage contient un article,
 // on affiche le panier et on supprime le message "panier vide"
@@ -39,24 +36,24 @@ function affichepanier() {
 // Pour chaque article dans le localStorage,
 // on crée des divs pour afficher le panier et recuperer les données du tableau
 
-    for (let produit in countproduct) { //copyOfLS
+    for (let produit in countproduct) { 
       let productRow = document.createElement("div");
       panier.insertBefore(productRow, testPanierVide);
-      productRow.classList.add("recuppanierrow", "productrow"); //cart-card__recap__row, ajout productrow
+      productRow.classList.add("recuppanierrow", "productrow"); 
   
       let productName = document.createElement("div");
       productRow.appendChild(productName);
-      productName.classList.add("recuppaniername"); //cart-card__recap__title
+      productName.classList.add("recuppaniername"); 
       productName.innerHTML = countproduct[produit].name;
   
       let productQuantity = document.createElement("div");
       productRow.appendChild(productQuantity);
-      productQuantity.classList.add("recuppaniername", "quantity"); //cart-card__recap__title, title-quantity
+      productQuantity.classList.add("recuppaniername", "quantity"); 
       productQuantity.innerHTML = countproduct[produit].quantity;
   
       let productPrice = document.createElement("div");
       productRow.appendChild(productPrice);
-      productPrice.classList.add("recuppaniername", "price", "price"); //"recuppaniername", data-price, pourquoi a tester !!
+      productPrice.classList.add("recuppaniername", "price", "price"); 
   
 // Affichage et calcul du prix en euros
 
@@ -72,12 +69,12 @@ function affichepanier() {
 // Création totalpanier :
 
 function totalpanier() {
-    let tableauPrix = []; //arrayOfPrice
+    let tableauPrix = []; 
     let totalPrice = document.querySelector(".total");
   
 // On push chaque prix du DOM dans un tableau
 
-    let priceQuantity = document.querySelectorAll(".price"); // productPriceAccordingToQuantity
+    let priceQuantity = document.querySelectorAll(".price"); 
     for (let price in priceQuantity) {
         tableauPrix.push(priceQuantity[price].innerHTML);
     }
@@ -113,7 +110,7 @@ function viderpanier() {
 
 // Lors du clic sur le btn : Nettoyage panier et localStorage
 
-const viderPanierBtn = document.querySelector(".verspaniervide");    //buttonToEmptyCart, to-empty-cart
+const viderPanierBtn = document.querySelector(".verspaniervide");    
     viderPanierBtn.addEventListener("click", () => {
     localStorage.clear();
     });
@@ -121,7 +118,7 @@ const viderPanierBtn = document.querySelector(".verspaniervide");    //buttonToE
 
 // ------------------------- FIN VIDERPANIER --------------------------
 
-// Création formulaire :
+// Création formulaire avec fetch post pour valider commande:
 
 
 
