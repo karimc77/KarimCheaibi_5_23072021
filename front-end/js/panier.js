@@ -11,7 +11,8 @@ main();
 
 function main() {
   affichepanier(); 
-  totalpanier(); 
+  totalpanier();
+  //cleararticle(); 
   viderpanier(); 
   //formulaire(); 
 }
@@ -53,7 +54,7 @@ function affichepanier() {
   
       let productPrice = document.createElement("div");
       productRow.appendChild(productPrice);
-      productPrice.classList.add("recuppaniername", "price", "price"); 
+      productPrice.classList.add("recuppaniername", "price"); 
   
 // Affichage et calcul du prix en euros
 
@@ -103,6 +104,22 @@ function totalpanier() {
   }
     
 // ------------------------- FIN TOTALPANIER --------------------------
+
+
+// Création cleararticle :
+
+// function cleararticle(event) {
+//      let clearArticle = JSON.parse(localStorage.getItem("products"));
+//      clearArticle = clearArticle.filter( (el) => el.id !== event.target.id);
+//      localStorage.setItem('products', JSON.stringify(clearArticle));
+//      window.location.href = "panier.html";
+//      let clear = document.createElement("i");
+//      let clearRow = document.createElement("i");
+//       clearRow.appendChild(clear);
+//       clear.classList.add("fas fa-trash");
+// }
+
+// ------------------------- FIN CLEARARTICLE --------------------------
 
 // Création viderpanier :
 

@@ -2,6 +2,7 @@
 /******police******/
 h2 {
     text-align: center;
+    color:#fff;
   }
   
   /******container********/
@@ -164,7 +165,7 @@ h2 {
   }
   
   .container .sipaniervide h2 a {
-    color: black;
+    color: #fff;
     text-decoration: underline;
   }
   
