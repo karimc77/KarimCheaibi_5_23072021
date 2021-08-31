@@ -1,8 +1,8 @@
 let panier = document.querySelector(".recuppanier");
 const product = localStorage.getItem("products");
-const countproduct = JSON.parse(product);
+const products = JSON.parse(product);
 
-console.log("count",product,countproduct);
+console.log("count",product,products);
 
 
 main();
@@ -10,9 +10,9 @@ main();
 // Création des fonctions :
 
 function main() {
-  affichepanier(); 
-  totalpanier();
-  //cleararticle(); 
+  affichepanier();
+  totalpanier(products);
+  cleararticle(); 
   viderpanier(); 
   //formulaire(); 
 }
@@ -37,87 +37,104 @@ function affichepanier() {
 // Pour chaque article dans le localStorage,
 // on crée des divs pour afficher le panier et recuperer les données du tableau
 
-    for (let produit in countproduct) { 
-      let productRow = document.createElement("div");
-      panier.insertBefore(productRow, testPanierVide);
-      productRow.classList.add("recuppanierrow", "productrow"); 
+    // for (let produit in products) { 
+    //   let productRow = document.createElement("div");
+    //   panier.insertBefore(productRow, testPanierVide);
+    //   productRow.classList.add("recuppanierrow", "productrow"); 
   
-      let productName = document.createElement("div");
-      productRow.appendChild(productName);
-      productName.classList.add("recuppaniername"); 
-      productName.innerHTML = countproduct[produit].name;
+    //   let productName = document.createElement("div");
+    //   productRow.appendChild(productName);
+    //   productName.classList.add("recuppaniername"); 
+    //   productName.innerHTML = products[produit].name;
   
-      let productQuantity = document.createElement("div");
-      productRow.appendChild(productQuantity);
-      productQuantity.classList.add("recuppaniername", "quantity"); 
-      productQuantity.innerHTML = countproduct[produit].quantity;
+    //   let productQuantity = document.createElement("div");
+    //   productRow.appendChild(productQuantity);
+    //   productQuantity.classList.add("recuppaniername", "quantity"); 
+    //   productQuantity.innerHTML = products[produit].quantity;
   
-      let productPrice = document.createElement("div");
-      productRow.appendChild(productPrice);
-      productPrice.classList.add("recuppaniername", "price"); 
+    //   let productPrice = document.createElement("div");
+    //   productRow.appendChild(productPrice);
+    //   productPrice.classList.add("recuppaniername", "price");
+
+    //   let clearArticle = document.createElement("i");
+    //   clearArticle.setAttribute("data-id", produit._id)
+    //   clearArticle.classList.add("fas","fa-trash");
+    //   productRow.appendChild(clearArticle);
+
+    
+        const panier = document.querySelector(".recuppanier");
+        let paniers= "";
+      for (const product of data) {
+        panier += `<div class="recuppanierrow">
+        <div class="recuppaniername row">Nom: ${product.name}</div>
+        <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>
+        <div class="recuppaniername price row">Prix: ${calculProductItem(product)} </div>
+        <div class="cleararticle">
+            <i class="fas fa-trash" onclick="cleararticle(${product._id})"></i>
+        </div>
+    </div>`;
+      }
+      panier.innerHTML = paniers;
+          
   
 // Affichage et calcul du prix en euros
 
       productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "EUR",
-      }).format(countproduct[produit].price * countproduct[produit].quantity);
-    }
-  }
+      }).format(products[produit].price * products[produit].quantity);
+}
+
 
 // ------------------------- FIN AFFICHEPANIER --------------------------
 
 // Création totalpanier :
 
-function totalpanier() {
+// Création calculItem :
+
+function calculProductItem(item) {
+  return item.price * item.quantity;	
+}
+
+function totalpanier(products) {
     let tableauPrix = []; 
     let totalPrice = document.querySelector(".total");
-  
-// On push chaque prix du DOM dans un tableau
 
-    let priceQuantity = document.querySelectorAll(".price"); 
-    for (let price in priceQuantity) {
-        tableauPrix.push(priceQuantity[price].innerHTML);
-    }
-  
-// On enlève les undefined du tableau
+    tableauPrix = products.map( product => calculProductItem(product));
+    
 
-    tableauPrix = tableauPrix.filter((e) => {
-      return e != undefined;
-    });
-  
-// Convertir le tableau en chiffres
-
-    tableauPrix = tableauPrix.map((x) => parseFloat(x));
-  
 // Somme du tableau pour prix total
 
-    const reducer = (acc, currentVal) => acc + currentVal;
-    tableauPrix = tableauPrix.reduce(reducer);
-  
+    const total = tableauPrix.reduce((acc, currentVal) => acc + currentVal);
+
+      console.log("ici", total);
+
 // Affichage du prix formaté en euros
 
-    totalPrice.innerText = `Total : ${(tableauPrix = new Intl.NumberFormat("fr-FR", {
+    totalPrice.innerText = `Total : ${(new Intl.NumberFormat("fr-FR", {
     style: "currency",
     currency: "EUR",
-    }).format(tableauPrix))}`;
-  }
+    }).format(total))}`;
+}
     
 // ------------------------- FIN TOTALPANIER --------------------------
 
 
 // Création cleararticle :
 
-// function cleararticle(event) {
-//      let clearArticle = JSON.parse(localStorage.getItem("products"));
-//      clearArticle = clearArticle.filter( (el) => el.id !== event.target.id);
-//      localStorage.setItem('products', JSON.stringify(clearArticle));
-//      window.location.href = "panier.html";
-//      let clear = document.createElement("i");
-//      let clearRow = document.createElement("i");
-//       clearRow.appendChild(clear);
-//       clear.classList.add("fas fa-trash");
-// }
+//document.querySelector(".cleararticle").addEventListener("click", cleararticle); A supprimer
+console.log("ici", document.querySelector(".cleararticle"));
+
+function cleararticle(id) {
+  //const id = document.querySelector(".cleararticle").getAttribute("data-id"); A supprimer
+  
+  
+      const clearArticle = products.filter( (el) => el.id !== id);
+             localStorage.setItem('products', JSON.stringify(clearArticle));
+             window.location.href = "panier.html";
+}
+
+
 
 // ------------------------- FIN CLEARARTICLE --------------------------
 
