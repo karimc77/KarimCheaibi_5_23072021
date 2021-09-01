@@ -63,58 +63,58 @@ function affichepanier() {
 
     
         const panier = document.querySelector(".recuppanier");
-        let paniers= "";
-      for (const product of data) {
-        panier += `<div class="recuppanierrow">
-        <div class="recuppaniername row">Nom: ${product.name}</div>
-        <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>
-        <div class="recuppaniername price row">Prix: ${calculProductItem(product)} </div>
-        <div class="cleararticle">
-            <i class="fas fa-trash" onclick="cleararticle(${product._id})"></i>
-        </div>
-    </div>`;
-      }
-      panier.innerHTML = paniers;
+        let   paniers = "";
+        for (const product of data) {
+          panier += `<div class="recuppanierrow">
+                      <div class="recuppaniername row">Nom: ${product.name}</div>
+                      <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>
+                      <div class="recuppaniername price row">Prix: ${calculProductItem(product)} </div>
+                      <div class="cleararticle">
+                        <i class="fas fa-trash" onclick="cleararticle(${product._id})"></i>
+                      </div>
+                    </div>`;
+        }
+          panier.innerHTML = paniers;
           
   
 // Affichage et calcul du prix en euros
 
-      productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
+        productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "EUR",
-      }).format(products[produit].price * products[produit].quantity);
+        }).format(products[produit].price * products[produit].quantity);
 }
 
 
 // ------------------------- FIN AFFICHEPANIER --------------------------
 
-// Création totalpanier :
-
-// Création calculItem :
+// Création calculProductItem (pour calculer par ligne de produit): 
 
 function calculProductItem(item) {
   return item.price * item.quantity;	
 }
 
+// ------------------------- FIN CALCULPRODUCTITEM --------------------------
+
+// Création totalpanier (pour faire le total du panier + conversion en euros):
+
+// Somme du tableau pour prix total (reduce)
+// Affichage du prix formaté en euros (format)
+
 function totalpanier(products) {
-    let tableauPrix = []; 
-    let totalPrice = document.querySelector(".total");
+  let tableauPrix = []; 
+  let totalPrice = document.querySelector(".total");
 
-    tableauPrix = products.map( product => calculProductItem(product));
-    
+      tableauPrix = products.map( product => calculProductItem(product));
 
-// Somme du tableau pour prix total
+  const total = tableauPrix.reduce((acc, currentVal) => acc + currentVal);
 
-    const total = tableauPrix.reduce((acc, currentVal) => acc + currentVal);
+        console.log("ici", total);
 
-      console.log("ici", total);
-
-// Affichage du prix formaté en euros
-
-    totalPrice.innerText = `Total : ${(new Intl.NumberFormat("fr-FR", {
-    style: "currency",
-    currency: "EUR",
-    }).format(total))}`;
+        totalPrice.innerText = `Total : ${(new Intl.NumberFormat("fr-FR", {
+        style: "currency",
+        currency: "EUR",
+        }).format(total))}`;
 }
     
 // ------------------------- FIN TOTALPANIER --------------------------
@@ -129,28 +129,26 @@ function cleararticle(id) {
   //const id = document.querySelector(".cleararticle").getAttribute("data-id"); A supprimer
   
   
-      const clearArticle = products.filter( (el) => el.id !== id);
-             localStorage.setItem('products', JSON.stringify(clearArticle));
-             window.location.href = "panier.html";
+  const clearArticle = products.filter( (el) => el.id !== id);
+        localStorage.setItem('products', JSON.stringify(clearArticle));
+        window.location.href = "panier.html";
 }
-
-
 
 // ------------------------- FIN CLEARARTICLE --------------------------
 
 // Création viderpanier :
 
-function viderpanier() {
-
 // Lors du clic sur le btn : Nettoyage panier et localStorage
 
-const viderPanierBtn = document.querySelector(".verspaniervide");    
-    viderPanierBtn.addEventListener("click", () => {
-    localStorage.clear();
-    });
+function viderpanier() {
+  const viderPanierBtn = document.querySelector(".verspaniervide");    
+        viderPanierBtn.addEventListener("click", () => {
+        localStorage.clear();
+        });
 }
 
 // ------------------------- FIN VIDERPANIER --------------------------
+
 
 // Création formulaire avec fetch post pour valider commande:
 
