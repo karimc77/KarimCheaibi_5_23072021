@@ -65,15 +65,15 @@ function affichepanier() {
         const panier = document.querySelector(".recuppanier");
         let   paniers = "";
 
-        for (const product of products) { // Products à la place de data
+        for (const produit of products) { // Products à la place de data
           paniers += `<div class="recuppanierrow">
                       <div class="recuppaniername row">Nom: ${product.name}</div>
-                      <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>
-                      <div class="recuppaniername price row">Prix: ${calculProductItem(product)}</div>
+                      <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>                      
+                      <div class="recuppaniername price row">Prix: ${formatPrice(calculProductItem(product))}</div>
                       <div class="cleararticle">
                         <i class="fas fa-trash" onclick="cleararticle(${product._id})"></i>
                       </div>
-                      </div>`;
+                      </div>`; //<div class="recuppaniername price row">Prix: ${calculProductItem(product)}</div>
         }
           panier.innerHTML = paniers;
   
@@ -83,6 +83,13 @@ function affichepanier() {
         style: "currency",
         currency: "EUR",
         }).format(products[produit].price * products[produit].quantity);
+
+function formatPrice(price) {
+          return new Intl.NumberFormat("fr-FR", {
+                  style: "currency",
+                  currency: "EUR",
+                  }).format(price);
+}
 }
 
 
