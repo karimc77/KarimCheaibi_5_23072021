@@ -64,18 +64,18 @@ function affichepanier() {
     
         const panier = document.querySelector(".recuppanier");
         let   paniers = "";
-        for (const product of data) {
-          panier += `<div class="recuppanierrow">
+
+        for (const product of products) { // Products à la place de data
+          paniers += `<div class="recuppanierrow">
                       <div class="recuppaniername row">Nom: ${product.name}</div>
                       <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>
-                      <div class="recuppaniername price row">Prix: ${calculProductItem(product)} </div>
+                      <div class="recuppaniername price row">Prix: ${calculProductItem(product)}</div>
                       <div class="cleararticle">
                         <i class="fas fa-trash" onclick="cleararticle(${product._id})"></i>
                       </div>
-                    </div>`;
+                      </div>`;
         }
           panier.innerHTML = paniers;
-          
   
 // Affichage et calcul du prix en euros
 
@@ -126,8 +126,8 @@ function totalpanier(products) {
 console.log("ici", document.querySelector(".cleararticle"));
 
 function cleararticle(id) {
-  //const id = document.querySelector(".cleararticle").getAttribute("data-id"); A supprimer
   
+  //const id = document.querySelector(".cleararticle").getAttribute("data-id"); A supprimer
   
   const clearArticle = products.filter( (el) => el.id !== id);
         localStorage.setItem('products', JSON.stringify(clearArticle));
