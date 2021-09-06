@@ -1,177 +1,299 @@
-let panier = document.querySelector(".recuppanier");
-const product = localStorage.getItem("products");
-const products = JSON.parse(product);
+const panier = document.querySelector(".recuppanier");
+const totalPrice = document.querySelector(".total");
+const deleteBtnBasket = document.querySelector(".verspaniervide");
+const products = JSON.parse(localStorage.getItem("products"));
+console.log("count", products);
 
-console.log("count",product,products);
+// A la fin du chargement du Dom, on lance toutes les fonctions
+document.addEventListener("DOMContentLoaded", (event) => {
+    event.preventDefault();
+    main();
+});
 
-
-main();
-
-// Création des fonctions :
-
-function main() {
-  affichepanier();
-  totalpanier(products);
-  cleararticle(); 
-  viderpanier(); 
-  //formulaire(); 
+/**
+ * Utilisation des arrow function : https://developer.mozilla.org/fr/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+ * @function main
+ * @returns void
+ */
+const main = () => {
+    displayBaskets(products);
+    totalBasketQuantity(products);
+    updateBasket();
+    deleteBasket();
+    form();
+    confirm();
 }
 
-// Création affichepanier :
+/**
+ * Affichage des items du panier
+ * @function displayBaskets
+ * @param products
+ * @retuns void
+ */
+const displayBaskets = (products) => {
+    let cardPanier = document.querySelector(".cardpanier");
+    let panierVide = document.querySelector(".sipaniervide");
 
-function affichepanier() {
-    let testPanierVide = document.querySelector(".paniervide"); 
-    let cardPanier = document.querySelector(".cardpanier");       
-    let panierVide = document.querySelector(".sipaniervide"); 
-  
-// Si le localStorage contient un article,
-// on affiche le panier et on supprime le message "panier vide"
-
-    if (product) {
+    if (products.length > 0) {
         cardPanier.style.display = "flex";
         cardPanier.style.flexDirection = "column";
         cardPanier.style.justifyContent = "space-around";
         panierVide.style.display = "none";
     }
-  
-// Pour chaque article dans le localStorage,
-// on crée des divs pour afficher le panier et recuperer les données du tableau
 
-    // for (let produit in products) { 
-    //   let productRow = document.createElement("div");
-    //   panier.insertBefore(productRow, testPanierVide);
-    //   productRow.classList.add("recuppanierrow", "productrow"); 
-  
-    //   let productName = document.createElement("div");
-    //   productRow.appendChild(productName);
-    //   productName.classList.add("recuppaniername"); 
-    //   productName.innerHTML = products[produit].name;
-  
-    //   let productQuantity = document.createElement("div");
-    //   productRow.appendChild(productQuantity);
-    //   productQuantity.classList.add("recuppaniername", "quantity"); 
-    //   productQuantity.innerHTML = products[produit].quantity;
-  
-    //   let productPrice = document.createElement("div");
-    //   productRow.appendChild(productPrice);
-    //   productPrice.classList.add("recuppaniername", "price");
-
-    //   let clearArticle = document.createElement("i");
-    //   clearArticle.setAttribute("data-id", produit._id)
-    //   clearArticle.classList.add("fas","fa-trash");
-    //   productRow.appendChild(clearArticle);
-
-    
-        const panier = document.querySelector(".recuppanier");
-        let   paniers = "";
-
-        for (const produit of products) { // Products à la place de data
-          paniers += `<div class="recuppanierrow">
+    let basketItem = "";
+    for (const product of products) {
+        basketItem += `<div class="recuppanierrow">
                       <div class="recuppaniername row">Nom: ${product.name}</div>
                       <div class="recuppaniername quantity row">Quantité: ${product.quantity}</div>                      
-                      <div class="recuppaniername price row">Prix: ${formatPrice(calculProductItem(product))}</div>
-                      <div class="cleararticle">
-                        <i class="fas fa-trash" onclick="cleararticle(${product._id})"></i>
+                      <div class="recuppaniername price row">Prix: ${formatPrice(calculateProductItem(product))}</div>
+                      <div class="cleararticle" data-id="${product._id}">
+                        <i class="fas fa-trash"></i>
                       </div>
-                      </div>`; //<div class="recuppaniername price row">Prix: ${calculProductItem(product)}</div>
-        }
-          panier.innerHTML = paniers;
-  
-// Affichage et calcul du prix en euros
+                      </div>
+                      <div class="paniervide">
+                        <a href="panier.html">
+                          <div class="panierbtn verspaniervide">Vider le panier</div>                                
+                        </a>
+                      </div>
+                      <div class="total"></div>                  
+                      `;
+    }
+    document.querySelector(".recuppanier").innerHTML = basketItem;
+}
 
-        productPrice.innerHTML = new Intl.NumberFormat("fr-FR", {
+/**
+ * Formate le prix en euros
+ * @function formatPrice
+ * @param price
+ * @returns {string}
+ */
+const formatPrice = (price) => {
+    if(isNaN(price)) {
+        console.error("Un type number est attendu !");
+        return;
+    }
+    return new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "EUR",
-        }).format(products[produit].price * products[produit].quantity);
-
-function formatPrice(price) {
-          return new Intl.NumberFormat("fr-FR", {
-                  style: "currency",
-                  currency: "EUR",
-                  }).format(price);
-}
+    }).format(price);
 }
 
-
-// ------------------------- FIN AFFICHEPANIER --------------------------
-
-// Création calculProductItem (pour calculer par ligne de produit): 
-
-function calculProductItem(item) {
-  return item.price * item.quantity;	
+/**
+ * Calcul le prix en fonction de la quantité pour un item
+ * @function calculateProductItem
+ * @param item: product
+ * @returns {number}
+ */
+const calculateProductItem = (item) => {
+    if( !item || !item?.price && !item?.quantity ) {
+        console.error("Cette objet n'est pas valide");
+        return;
+    }
+    return item.price * item.quantity;
 }
 
-// ------------------------- FIN CALCULPRODUCTITEM --------------------------
-
-// Création totalpanier (pour faire le total du panier + conversion en euros):
-
-// Somme du tableau pour prix total (reduce)
-// Affichage du prix formaté en euros (format)
-
-function totalpanier(products) {
-  let tableauPrix = []; 
-  let totalPrice = document.querySelector(".total");
-
-      tableauPrix = products.map( product => calculProductItem(product));
-
-  const total = tableauPrix.reduce((acc, currentVal) => acc + currentVal);
-
-        console.log("ici", total);
-
-        totalPrice.innerText = `Total : ${(new Intl.NumberFormat("fr-FR", {
-        style: "currency",
-        currency: "EUR",
-        }).format(total))}`;
-}
-    
-// ------------------------- FIN TOTALPANIER --------------------------
-
-
-// Création cleararticle :
-
-//document.querySelector(".cleararticle").addEventListener("click", cleararticle); A supprimer
-console.log("ici", document.querySelector(".cleararticle"));
-
-function cleararticle(id) {
-  
-  //const id = document.querySelector(".cleararticle").getAttribute("data-id"); A supprimer
-  
-  const clearArticle = products.filter( (el) => el.id !== id);
-        localStorage.setItem('products', JSON.stringify(clearArticle));
-        window.location.href = "panier.html";
+/**
+ * Calcul le prix total en fonction de la quantité des items
+ * @function totalBasketQuantity
+ * @param products
+ * @retuns void
+ */
+const totalBasketQuantity = (products) => {
+    if( products.length === 0 ) {
+        console.error("Le panier semble vide!");
+        return;
+    }
+    const priceArray = products
+        .map(product => calculateProductItem(product))
+        .reduce((acc, currentVal) => acc + currentVal);
+    totalPrice.innerText = `Total : ${formatPrice(priceArray)}`;
 }
 
-// ------------------------- FIN CLEARARTICLE --------------------------
+/**
+ * Suppression d'un article par son id
+ * @function deleteArticle
+ * @param id
+ * @returns void
+ */
+const deleteArticle = (id) => {
+    if(!id) {
+        console.error("L'id est vide. Impossible de supprimer");
+        return;
+    }
+    const productFiltered = products.filter((el) => el._id !== id);
+    localStorage.setItem('products', JSON.stringify(productFiltered));
+    location.reload();
+}
 
-// Création viderpanier :
+/**
+ * Permet d'update le panier après une suppression
+ * @function updateBasket
+ * @return void
+ */
+const updateBasket = () => {
+    const deleteBtnArticle = document.querySelector(".cleararticle");
+    if( !deleteBtnArticle ) {
+        console.error("Le button 'cleararticle' n'existe pas");
+        return;
+    }
+    deleteBtnArticle.addEventListener('click', (event) => {
+        event.preventDefault();
+        const id = document.querySelector(".cleararticle").getAttribute('data-id');
+        deleteArticle(id);
+    })
+}
 
-// Lors du clic sur le btn : Nettoyage panier et localStorage
-
-function viderpanier() {
-  const viderPanierBtn = document.querySelector(".verspaniervide");    
-        viderPanierBtn.addEventListener("click", () => {
+/**
+ * Suppression dun panier
+ * @function deleteBasket
+ * @returns void
+ */
+const deleteBasket = () => {
+    deleteBtnBasket.addEventListener("click", (event) => {
+        event.preventDefault();
         localStorage.clear();
-        });
+    });
 }
 
-// ------------------------- FIN VIDERPANIER --------------------------
+
+/**
+ * Création Formulaire Commande
+ * @function form
+ * @returns void 
+ */
+
+const form = () => {
+  if (products == 0) {
+    console.log("merci de remplir votre panier");
+    const form = document.querySelector(".panierform");
+    form.style.opacity = "0";
+  } else {
+    const form = document.querySelector(".panierform");
+    let forms = "";
+    forms += `<form class="form">
+    <div class="name-and-lastname">
+        <div class="panierformrow" id="nameproduct">
+            <label for="name">Prénom :</label>
+            <input type="text" placeholder="Prénom" id="name" name="username" required> 
+        </div>
+  
+        <div class="panierformrow" id="lastnameproduct">
+            <label for="lastname">Nom :</label>
+            <input type="text" placeholder="Nom" id="lastname" name="userlastname" required>
+        </div>
+    </div>       
+    <div class="postal-and-city">
+        <div class="panierformrow" id="adressproduct">
+            <label for="adress">Adresse :</label>
+            <input type="text" placeholder="Adresse de livraison" id="adress" name="useradress" required>
+        </div>
+  
+        <div class="panierformrow" id="cityproduct">
+            <label for="city">Ville :</label>
+            <input type="text" placeholder="Ville" id="city" name="usercity" required>
+        </div>
+        
+        <div class="panierformrow" id="postalproduct">
+            <label for="postal">Code postal :</label>
+            <input type="text" placeholder="Code postal" id="postal" name="userpostal" required>
+        </div>                       
+    </div>
+        <div class="panierformrow" id="mailproduct">
+            <label for="mail">Adresse mail :</label>
+            <input type="email" placeholder="Adresse mail" id="mail" name="usermail" required>
+        </div>
+  
+        <div class="panierformrow" id="phoneproduct">
+            <label for="phone" >Numéro de téléphone :</label>
+            <input type="tel" placeholder="Numéro de téléphone" id="phone" name="phone" required >
+        </div>
+  
+        <div class="erreur"></div>
+        <div class="commandebtn">
+            <div id="submit" class="panierbtn pay" >Commander</div>
+        </div>
+              </form>
+        <div class="confirmajoutpanier" onclick="confirm(event)">
+            <p class="confirmtext"></p>
+        </div>`;
+  
+  document.querySelector(".panierform").innerHTML = forms;
+  }
+}
+
+/**
+ * Création Formulaire Commande
+ * @function confirm
+ * @param event
+ * @returns void 
+ */
+
+ const confirm = (event) => {
+  
+    let name = document.getElementById("name").value;
+    let lastname = document.getElementById("lastname").value;  
+    let adress = document.getElementById("adress").value;
+    let city = document.getElementById("city").value;
+    let postal = document.getElementById("postal").value;
+    let email = document.getElementById("email").value;
+    let phone = document.getElementById("phone").value;
+    
+    
+    let contact = {
+      name: name,
+      lastName: lastname,
+      address: adress,
+      city: city,
+      postal: postal,
+      email: email,
+      phone: phone
+    };
+
+    let products = JSON.parse(localStorage.getItem("products"));
+  
+    const confirms = [];
+    for (p = 0; p < products.length; p++) {
+      let idProduct = products[p].id;
+      confirms.push(idProduct);
+    }
+    //console.log("confirms",confirms);
+
+    const elementToSend = { contact: contact, confirms:confirms };
+    const url = "http://localhost:3000/api/teddies/order";
+    let data = JSON.stringify(elementToSend);
+    let fetchData = {
+      method: "POST",
+      body: data,
+      headers: { "Content-Type": "application/json" },
+    };
+  
+    fetch(url, fetchData)
+      //Voir le resultat du serveur dans la console
+      .then(async (response) => {
+        try {
+          console.log(response);
+          const dataResponse = await response.json();
+          console.log("OK");
+          if (response.ok) {
+      //Envoyer l'id dans le local storage
+            alert(dataResponse.orderId);
+          } else {
+            console.log("KO");
+          }
+        } catch (e) {
+          console.log(e);
+          console.log("KO");
+        }
+      })
+      .catch(function (error) {
+        alert(`Erreur, impossible de transmettre la requête au serveur`);
+        console.log(error);
+      });
+}
 
 
-// Création formulaire avec fetch post pour valider commande:
-
-
-
-// ------------------------- FIN FORMULAIRE --------------------------
-
-
-
-
-// Faire le calcul du panier , recuperer la valeur de nounoursnum
-
-// Vider le panier entierement ou par article
-
-// Faire le fetch post une fois la commande validée 
-
+ 
 
 
 
