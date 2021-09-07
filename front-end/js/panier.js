@@ -50,13 +50,7 @@ const displayBaskets = (products) => {
                       <div class="cleararticle" data-id="${product._id}">
                         <i class="fas fa-trash"></i>
                       </div>
-                      </div>
-                      <div class="paniervide">
-                        <a href="panier.html">
-                          <div class="panierbtn verspaniervide">Vider le panier</div>                                
-                        </a>
-                      </div>
-                      <div class="total"></div>                  
+                      </div>                                        
                       `;
     }
     document.querySelector(".recuppanier").innerHTML = basketItem;
@@ -152,7 +146,8 @@ const updateBasket = () => {
 const deleteBasket = () => {
     deleteBtnBasket.addEventListener("click", (event) => {
         event.preventDefault();
-        localStorage.clear();
+        localStorage.removeItem("products");
+        window.location.href = "panier.html";
     });
 }
 
@@ -207,90 +202,18 @@ const form = () => {
         <div class="panierformrow" id="phoneproduct">
             <label for="phone" >Numéro de téléphone :</label>
             <input type="tel" placeholder="Numéro de téléphone" id="phone" name="phone" required >
-        </div>
-  
-        <div class="erreur"></div>
-        <div class="commandebtn">
-            <div id="submit" class="panierbtn pay" >Commander</div>
-        </div>
-              </form>
-        <div class="confirmajoutpanier" onclick="confirm(event)">
-            <p class="confirmtext"></p>
-        </div>`;
+        </div>  
+        `;
   
   document.querySelector(".panierform").innerHTML = forms;
   }
 }
 
-/**
- * Création Formulaire Commande
- * @function confirm
- * @param event
- * @returns void 
- */
 
- const confirm = (event) => {
-  
-    let name = document.getElementById("name").value;
-    let lastname = document.getElementById("lastname").value;  
-    let adress = document.getElementById("adress").value;
-    let city = document.getElementById("city").value;
-    let postal = document.getElementById("postal").value;
-    let email = document.getElementById("email").value;
-    let phone = document.getElementById("phone").value;
-    
-    
-    let contact = {
-      name: name,
-      lastName: lastname,
-      address: adress,
-      city: city,
-      postal: postal,
-      email: email,
-      phone: phone
-    };
 
-    let products = JSON.parse(localStorage.getItem("products"));
-  
-    const confirms = [];
-    for (p = 0; p < products.length; p++) {
-      let idProduct = products[p].id;
-      confirms.push(idProduct);
-    }
-    //console.log("confirms",confirms);
 
-    const elementToSend = { contact: contact, confirms:confirms };
-    const url = "http://localhost:3000/api/teddies/order";
-    let data = JSON.stringify(elementToSend);
-    let fetchData = {
-      method: "POST",
-      body: data,
-      headers: { "Content-Type": "application/json" },
-    };
-  
-    fetch(url, fetchData)
-      //Voir le resultat du serveur dans la console
-      .then(async (response) => {
-        try {
-          console.log(response);
-          const dataResponse = await response.json();
-          console.log("OK");
-          if (response.ok) {
-      //Envoyer l'id dans le local storage
-            alert(dataResponse.orderId);
-          } else {
-            console.log("KO");
-          }
-        } catch (e) {
-          console.log(e);
-          console.log("KO");
-        }
-      })
-      .catch(function (error) {
-        alert(`Erreur, impossible de transmettre la requête au serveur`);
-        console.log(error);
-      });
-}
+
+
 
 
  
