@@ -170,7 +170,7 @@ const form = () => {
     <div class="name-and-lastname">
         <div class="panierformrow" id="nameproduct">
             <label for="name">Prénom :</label>
-            <input type="text" placeholder="Prénom" id="name" name="username" required> 
+            <input type="text" placeholder="Prenom" id="name" name="username" required> 
         </div>
   
         <div class="panierformrow" id="lastnameproduct">
@@ -181,7 +181,7 @@ const form = () => {
     <div class="postal-and-city">
         <div class="panierformrow" id="adressproduct">
             <label for="adress">Adresse :</label>
-            <input type="text" placeholder="Adresse de livraison" id="adress" name="useradress" required>
+            <input type="text" placeholder="Adresse" id="adress" name="useradress" required>
         </div>
   
         <div class="panierformrow" id="cityproduct">
@@ -191,26 +191,96 @@ const form = () => {
         
         <div class="panierformrow" id="postalproduct">
             <label for="postal">Code postal :</label>
-            <input type="text" placeholder="Code postal" id="postal" name="userpostal" required>
+            <input type="text" placeholder="Postal" id="postal" name="userpostal" required>
         </div>                       
     </div>
         <div class="panierformrow" id="mailproduct">
             <label for="mail">Adresse mail :</label>
-            <input type="email" placeholder="Adresse mail" id="mail" name="usermail" required>
+            <input type="email" placeholder="Email" id="mail" name="usermail" required>
         </div>
   
         <div class="panierformrow" id="phoneproduct">
             <label for="phone" >Numéro de téléphone :</label>
-            <input type="tel" placeholder="Numéro de téléphone" id="phone" name="phone" required >
+            <input type="tel" placeholder="Phone" id="phone" name="phone" required >
         </div>  
-        `;
+              </form>
+        <div class="commandebtn">
+            <div id="submit" class="panierbtn pay">Commander</div>
+        </div>`;
   
   document.querySelector(".panierform").innerHTML = forms;
   }
 }
 
+/**
+ * Création Formulaire Commande
+ * @function confirm
+ * @param event
+ * @return void 
+ */
 
+ const confirm = (event) => {
+  
+  let name = document.getElementById("name").value;
+  let lastname = document.getElementById("lastname").value;  
+  let adress = document.getElementById("adress").value;
+  let city = document.getElementById("city").value;
+  let postal = document.getElementById("postal").value;
+  let mail = document.getElementById("mail").value;
+  let phone = document.getElementById("phone").value;
+  
+  
+  let contact = {
+    name: name,
+    lastName: lastname,
+    address: adress,
+    city: city,
+    postal: postal,
+    email: mail,
+    phone: phone
+  };
 
+  let products = JSON.parse(localStorage.getItem("products"));
+
+  const confirms = [];
+  for (p = 0; p < products.length; p++) {
+    let idProduct = products[p].id;
+    confirms.push(idProduct);
+  }
+  //console.log("confirms",confirms);
+
+  const elementToSend = { contact: contact, confirms:confirms };
+  const url = "http://localhost:3000/api/teddies/order";
+  let data = JSON.stringify(elementToSend);
+  let fetchData = {
+    method: "POST",
+    body: data,
+    headers: { "Content-Type": "application/json" },
+  };
+
+  fetch(url, fetchData)
+    //Voir le resultat du serveur dans la console
+    .then(async (response) => {
+      try {
+        console.log(response);
+        const dataResponse = await response.json();
+        console.log("OK");
+        if (response.ok) {
+    //Envoyer l'id dans le local storage
+          alert(dataResponse.orderId);
+        } else {
+          console.log("KO");
+        }
+      } catch (e) {
+        console.log(e);
+        console.log("KO");
+      }
+    })
+    .catch(function (error) {
+      alert(`Erreur, impossible de transmettre la requête au serveur`);
+      console.log(error);
+    });
+}
 
 
 
