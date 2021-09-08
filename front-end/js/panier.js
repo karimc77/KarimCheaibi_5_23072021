@@ -205,7 +205,7 @@ const form = () => {
         </div>  
               </form>
         <div class="commandebtn">
-            <div id="submit" class="panierbtn pay">Commander</div>
+            <div id="submit" class="panierbtn pay" onclick="confirm(event)">Commander</div>
         </div>`;
   
   document.querySelector(".panierform").innerHTML = forms;
@@ -213,7 +213,7 @@ const form = () => {
 }
 
 /**
- * Création Formulaire Commande
+ * Confirmation de la Commande
  * @function confirm
  * @param event
  * @return void 
@@ -226,30 +226,27 @@ const form = () => {
   let adress = document.getElementById("adress").value;
   let city = document.getElementById("city").value;
   let postal = document.getElementById("postal").value;
-  let mail = document.getElementById("mail").value;
-  let phone = document.getElementById("phone").value;
-  
+  let mail = document.getElementById("mail").value;  
   
   let contact = {
     name: name,
-    lastName: lastname,
-    address: adress,
+    lastname: lastname,
+    adress: adress,
     city: city,
     postal: postal,
     email: mail,
-    phone: phone
   };
 
   let products = JSON.parse(localStorage.getItem("products"));
 
-  const confirms = [];
+  const confirm = [];
   for (p = 0; p < products.length; p++) {
     let idProduct = products[p].id;
-    confirms.push(idProduct);
+    confirm.push(idProduct);
   }
-  //console.log("confirms",confirms);
+  //console.log("confirm",confirm);
 
-  const elementToSend = { contact: contact, confirms:confirms };
+  const elementToSend = {contact: contact, confirm: products};
   const url = "http://localhost:3000/api/teddies/order";
   let data = JSON.stringify(elementToSend);
   let fetchData = {
