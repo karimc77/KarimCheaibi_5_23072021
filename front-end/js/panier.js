@@ -21,7 +21,7 @@ const main = () => {
     updateBasket();
     deleteBasket();
     form();
-    confirm();
+    sendDataForm();
 }
 
 /**
@@ -202,54 +202,61 @@ const form = () => {
         <div class="panierformrow" id="phoneproduct">
             <label for="phone" >Numéro de téléphone :</label>
             <input type="tel" placeholder="Phone" id="phone" name="phone" required >
-        </div>  
-              </form>
+        </div>
         <div class="commandebtn">
-            <div id="submit" class="panierbtn pay" onclick="confirm(event)">Commander</div>
-        </div>`;
+            <button type="submit" id="submit" class="panierbtn pay">Commander</div>
+        </div> 
+              </form>`;
   
   document.querySelector(".panierform").innerHTML = forms;
   }
 }
 
+
+
 /**
- * Confirmation de la Commande
- * @function confirm
- * @param event
+ * Envoyer les données du formulaire
+ * @function sendDataForm
+ * @param
  * @return void 
  */
 
- const confirm = (event) => {
+const sendDataForm = () => {  
+document.querySelector(".form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  confirm()
+});
+} 
+
+/**
+ * Confirmation de la Commande
+ * @function confirm
+ * @param
+ * @return void 
+ */
+
+ const confirm = () => {
   
-  let name = document.getElementById("name").value;
-  let lastname = document.getElementById("lastname").value;  
-  let adress = document.getElementById("adress").value;
-  let city = document.getElementById("city").value;
-  let postal = document.getElementById("postal").value;
-  let mail = document.getElementById("mail").value;  
+  const name = document.getElementById("name").value;
+  const lastname = document.getElementById("lastname").value;  
+  const adress = document.getElementById("adress").value;
+  const city = document.getElementById("city").value;
+  const mail = document.getElementById("mail").value;
   
-  let contact = {
-    name: name,
-    lastname: lastname,
-    adress: adress,
+  const contact = {
+    firstName: name,
+    lastName: lastname,
+    address: adress,
     city: city,
-    postal: postal,
     email: mail,
   };
 
-  let products = JSON.parse(localStorage.getItem("products"));
-
-  const confirm = [];
-  for (p = 0; p < products.length; p++) {
-    let idProduct = products[p].id;
-    confirm.push(idProduct);
-  }
-  //console.log("confirm",confirm);
-
-  const elementToSend = {contact: contact, confirm: products};
+  const confirm = products.map(product => product._id);
+  
+  const elementToSend = {contact, products: confirm};
   const url = "http://localhost:3000/api/teddies/order";
-  let data = JSON.stringify(elementToSend);
-  let fetchData = {
+  const data = JSON.stringify(elementToSend);
+  const fetchData = {
     method: "POST",
     body: data,
     headers: { "Content-Type": "application/json" },
@@ -274,10 +281,20 @@ const form = () => {
       }
     })
     .catch(function (error) {
-      alert(`Erreur, impossible de transmettre la requête au serveur`);
+      console.error(`Erreur, impossible de transmettre la requête au serveur`);
       console.log(error);
     });
 }
+
+// confirm .html , avec confirm.js
+
+// stocker dataresponse, orderid  dans le LS
+
+// rediriger vers la page html location href=confirm.html, rajouter confirm.html?orderid = numero 
+
+// dans le confirm.js filtrer le numero de commande dans le LS
+
+// Attention eliminer les doublons dans le panier 
 
 
 
