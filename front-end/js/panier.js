@@ -271,7 +271,9 @@ document.querySelector(".form").addEventListener("submit", (event) => {
         console.log("OK");
         if (response.ok) {
     //Envoyer l'id dans le local storage
+          localStorage.setItem("orderIdResponse", dataResponse.orderId);
           alert(dataResponse.orderId);
+          window.location = "confirm.html";
         } else {
           console.log("KO");
         }

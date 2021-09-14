@@ -211,6 +211,33 @@ main {
   #nounoursNum {
     width: 50px;
   }
+
+  .command {
+    color:#fff;
+  }
+  
+/* CONFIRMATION */
+
+  section {
+    text-align: center;
+  }
+  
+  h1 {
+    font-size: 2.9rem;
+  }
+  p {
+    font-size: 1.6rem;
+    color: #f43c3c;
+  }
+  #confirmprice {
+    color: #f43c3c;
+  }
+
+
+
+
+
+
   /*********media queries************/
   
   @media (max-width: 612px) {
