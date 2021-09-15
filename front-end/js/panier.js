@@ -272,6 +272,7 @@ document.querySelector(".form").addEventListener("submit", (event) => {
         if (response.ok) {
     //Envoyer l'id dans le local storage
           localStorage.setItem("orderIdResponse", dataResponse.orderId);
+          localStorage.setItem("totalPrice", totalPrice.innerText);
           alert(dataResponse.orderId);
           window.location = "confirm.html";
         } else {
