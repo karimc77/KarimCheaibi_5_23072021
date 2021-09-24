@@ -37,18 +37,18 @@ function main() {
 }
 
 // getArticles (pour recuperer les articles avec l'id)
+// On récupère le produit selectionné avec l' id dans la requete
+// On place les données reçues via l'API aux bons endroits sur la page
+// Affichage du prix en euros
+// Récuperation des couleurs de chaque peluche
 
 function getArticles() {
-
-// On récupère le produit selectionné avec l' id dans la requete
 
   fetch(urlApi)
     .then(function (response) {
       return response.json();
     })    
     .then(function (Apiresult) {
-
-// On place les données reçues via l'API aux bons endroits sur la page
 
 if( Array.isArray(Apiresult)) {
   product = Apiresult.find( result => result._id === id);
@@ -61,15 +61,11 @@ console.log(product);
       productImg.src = product.imageUrl;
       productDesc.innerText = product.description;
 
-// Affichage du prix en euros
-
       product.price = product.price / 100;
       productPrice.innerText = new Intl.NumberFormat("fr-FR", {
         style: "currency",
         currency: "EUR",
       }).format(product.price);
-
-// Récuperation des couleurs de chaque peluche
 
       let colorSelect = document.getElementById("colorSelect");
       for (let i = 0; i < product.colors.length; i++) {
@@ -81,6 +77,12 @@ console.log(product);
 }
 
 // ajoutPanier (pour ajouter dans le panier a l'aide du LocalStorage)
+// Création du produit qui sera ajouté au panier
+// Gestion du localStorage, création d'un tableau
+// Si le localStorage existe, on récupère son contenu, on l'insère dans le tableau panierproducts,
+// puis on le renvoit vers le localStorage avec le nouveau produit ajouté.
+// Si le LocalStorage est vide, on le crée avec le produit ajouté
+// Effets visuels lors d'un ajout au panier
 
 function ajoutPanier() {
   const ajoutPanier = document.querySelector(".ajoutpanier");
@@ -90,12 +92,11 @@ function ajoutPanier() {
   
   console.log(nounoursNum);
 
+
 let ajoutproduit = {};
 
   ajoutPanier.addEventListener("click", () => {
     if (nounoursNum.value > 0) {
-
-// Création du produit qui sera ajouté au panier
 
       ajoutproduit = {
         name: productName.innerHTML,
@@ -105,25 +106,19 @@ let ajoutproduit = {};
         _id: id,
       };
 
-// Gestion du localStorage, création d'un tableau
 
 let panierproducts = [];
-
-// Si le localStorage existe, on récupère son contenu, on l'insère dans le tableau panierproducts,
-// puis on le renvoit vers le localStorage avec le nouveau produit ajouté.
 
 if (localStorage.getItem("products") !== null) {
   panierproducts = JSON.parse(localStorage.getItem("products"));
 }
 
-// Si le LocalStorage est vide, on le crée avec le produit ajouté
 
 console.log("blalalal",ajoutproduit);
 
 panierproducts.push(ajoutproduit);
 localStorage.setItem("products", JSON.stringify(panierproducts));
 
-// Effets visuels lors d'un ajout au panier
 
 confirmPanier.style.visibility = "visible";
 confirm.innerHTML = `Vous avez ajouté ${nounoursNum.value} nounours à votre panier !`;

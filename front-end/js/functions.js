@@ -3,7 +3,7 @@ const manageEnvironment = (endpoints) => {
       console.error("no endpoints");
       return;
     }
-    let urlBaseApi = "http://localhost:3000/${endpoints}";
+    let urlBaseApi = `http://localhost:3000/${endpoints}`;
     const urlSite = location.hostname;
     if(urlSite.includes('github')) {
         urlBaseApi = "data/teddy.json";
@@ -12,8 +12,11 @@ const manageEnvironment = (endpoints) => {
 }
 
 const requestApi = async(urlApi) => {
-    return await fetch(urlApi).then( (response) => response.json());
-  }
+    return await fetch(urlApi).then( (response) => response.json()).catch(error => {
+        console.error(error);
+        throw new Error(`Error: ${error.message}`);
+      });
+}
 
 const createTpl = (products) => {
     if( !products ) {

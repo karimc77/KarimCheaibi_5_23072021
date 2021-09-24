@@ -235,6 +235,10 @@ document.querySelector(".form").addEventListener("submit", (event) => {
  * @return void 
  */
 
+//Voir le resultat du serveur dans la console
+//Envoyer l'id dans le local storage
+
+
  const confirm = () => {
   
   const name = document.getElementById("name").value;
@@ -263,14 +267,16 @@ document.querySelector(".form").addEventListener("submit", (event) => {
   };
 
   fetch(url, fetchData)
-    //Voir le resultat du serveur dans la console
+    
+
     .then(async (response) => {
       try {
         console.log(response);
         const dataResponse = await response.json();
         console.log("OK");
         if (response.ok) {
-    //Envoyer l'id dans le local storage
+    
+
           localStorage.setItem("orderIdResponse", dataResponse.orderId);
           localStorage.setItem("totalPrice", totalPrice.innerText);
           alert(dataResponse.orderId);
@@ -288,22 +294,3 @@ document.querySelector(".form").addEventListener("submit", (event) => {
       console.log(error);
     });
 }
-
-// confirm .html , avec confirm.js
-
-// stocker dataresponse, orderid  dans le LS
-
-// rediriger vers la page html location href=confirm.html, rajouter confirm.html?orderid = numero 
-
-// dans le confirm.js filtrer le numero de commande dans le LS
-
-// Attention eliminer les doublons dans le panier 
-
-
-
-
-
- 
-
-
-

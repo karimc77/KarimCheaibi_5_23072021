@@ -1,7 +1,14 @@
-const urlApi = manageEnvironment("api/teddies")
+document.addEventListener('DOMContentLoaded', function () {
+  try {
+    const urlApi = manageEnvironment("api/teddies")
 
-requestApi(urlApi).then((data) => {
+    requestApi(urlApi).then((data) => {
     const card = document.querySelector(".products");
-    const createTpl = createTpl(data);
-    card.innerHTML = createTpl;
+    const template = createTpl(data);
+    card.innerHTML = template;
+    })
+  } catch(error) {
+    console.log("debug")
+    console.log(error)
+  }  
 });
